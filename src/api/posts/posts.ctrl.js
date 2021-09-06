@@ -1,5 +1,13 @@
 import Post from '../../models/post';
 
+/*
+{
+	"title" : "제목",
+	"body" : "내용",
+	"tags" : ["태그1", "태그2"]
+}
+*/
+
 export const write = async ctx => {
 	const {title, body, tags} = ctx.request.body;
 	const post  = new Post({
@@ -17,8 +25,23 @@ export const write = async ctx => {
 
 };
 
-export const list = ctx => {};
 
+/*
+GET /api/posts
+*/
+export const list = async ctx => {
+	try{
+		const posts = await Post.find().exec();
+		ctx.body = posts;
+	}catch(e) {
+		ctx.throw(500, e);
+	}
+};
+
+
+/*
+GET /api/posts/:id
+*/
 export const read = ctx => {};
 
 export const remove = ctx => {};
