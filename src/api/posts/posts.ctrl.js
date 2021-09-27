@@ -50,6 +50,7 @@ export const write = async ctx => {
 		title,
 		body,
 		tags,
+		user : ctx.state.user,
 	});
 
 	try {
